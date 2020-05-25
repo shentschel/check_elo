@@ -16,6 +16,7 @@ namespace check_elo
 
         private static void Main(string[] args)
         {
+            CheckResult checkResult = new CheckResult();
             var configFilePath = Process.GetCurrentProcess().ProcessName + ".json";
             var settings = ConfigReader.ReadConfigFile(configFilePath);
 
@@ -43,18 +44,18 @@ namespace check_elo
                     WorkflowNodesParameters,
                     OcrParameters, 
                     PasswordParameters>(args)
-                .MapResult((DocCountParameters parameters) => new DocCountCommand(client, settings, parameters).Run(),
-                    (FileUploadParameters parameters) => new FileUploadCommand(client, settings, parameters).Run(),
-                    (IxSessionParameters parameters) => new IxSessionCommand(client, settings, parameters).Run(),
-                    (EloLoginParameters parameters) => new LoginCommand(client, settings, parameters).Run(),
+                .MapResult((DocCountParameters parameters) => new DocCountCommand(client, settings, parameters, checkResult).Run(),
+                    (FileUploadParameters parameters) => new FileUploadCommand(client, settings, parameters, checkResult).Run(),
+                    (IxSessionParameters parameters) => new IxSessionCommand(client, settings, parameters, checkResult).Run(),
+                    (EloLoginParameters parameters) => new LoginCommand(client, settings, parameters, checkResult).Run(),
                     (SqlConnectionParameters parameters) =>
-                        new SqlConnectionCommand(client, settings, parameters).Run(),
-                    (TomcatParameters parameters) => new TomcatCommand(client, settings, parameters).Run(),
-                    (WebappParameters parameters) => new WebappCommand(client, settings, parameters).Run(),
+                        new SqlConnectionCommand(client, settings, parameters, checkResult).Run(),
+                    (TomcatParameters parameters) => new TomcatCommand(client, settings, parameters, checkResult).Run(),
+                    (WebappParameters parameters) => new WebappCommand(client, settings, parameters, checkResult).Run(),
                     (WorkflowNodesParameters parameters) =>
-                        new WorkflowNodesCommand(client, settings, parameters).Run(),
-                    (OcrParameters parameters) => new OcrCommand(client, settings, parameters).Run(),
-                    (PasswordParameters parameters) => new PasswordCommand(client, settings, parameters).Run(), 
+                        new WorkflowNodesCommand(client, settings, parameters, checkResult).Run(),
+                    (OcrParameters parameters) => new OcrCommand(client, settings, parameters, checkResult).Run(),
+                    (PasswordParameters parameters) => new PasswordCommand(client, settings, parameters, checkResult).Run(), 
                     parseErrors =>
                     {
                         var response = new CheckResult
@@ -69,6 +70,8 @@ namespace check_elo
                         return false;
                     }
                 );
+            
+            Environment.Exit(Convert.ToInt32(checkResult.ExitCode));
         }
     }
 }

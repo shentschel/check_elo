@@ -11,8 +11,8 @@ namespace check_elo.Commands.impl
 {
     public class OcrCommand : BaseCommand<OcrParameters>
     {
-        public OcrCommand(IXClient client, Settings settings, OcrParameters parameters) : base(client, settings,
-            parameters)
+        public OcrCommand(IXClient client, Settings settings, OcrParameters parameters, CheckResult checkResult) : base(client, settings,
+            parameters, checkResult)
         {
         }
 

@@ -13,8 +13,8 @@ namespace check_elo.Commands.impl
 {
     public class WebappCommand : BaseCommand<WebappParameters>
     {
-        public WebappCommand(IXClient client, Settings settings, WebappParameters parameters) : base(client, settings,
-            parameters)
+        public WebappCommand(IXClient client, Settings settings, WebappParameters parameters, CheckResult checkResult) : base(client, settings,
+            parameters, checkResult)
         {
             Log.Debug("Created Webapp Command");
         }
@@ -115,7 +115,7 @@ namespace check_elo.Commands.impl
 
                 if (!match.Success) return;
 
-                var containsWarningsMessage = !content.ToLower().Contains("warnings - should be fixed");
+                var containsWarningsMessage = content.ToLower().Contains("warnings - should be fixed");
                 CheckResult.Message = match.Groups[regexGroupName].Value;
                 CheckResult.ExitCode = containsWarningsMessage ? ExitCode.Warning : ExitCode.Critical;
             }

@@ -7,8 +7,8 @@ namespace check_elo.Commands.impl
 {
     public class DocCountCommand : EloCommand<DocCountParameters>
     {
-        public DocCountCommand(IXClient client, Settings settings, DocCountParameters parameters) : base(client,
-            settings, parameters)
+        public DocCountCommand(IXClient client, Settings settings, DocCountParameters parameters, CheckResult checkResult) : base(client,
+            settings, parameters, checkResult)
         {
         }
 
@@ -21,7 +21,8 @@ namespace check_elo.Commands.impl
         {
             var docCount = Client.IX.getArchiveStatistics(1L).maxDocId;
 
-            CheckResult.Message = string.Format("Documents in archive: {0} | maxDocId={0}", docCount);
+            CheckResult.Message = $"Documents in archive: {docCount}";
+            CheckResult.PerformanceData = $"maxDocId={docCount}";
             CheckResult.ExitCode = ExitCode.Ok;
 
             if (Parameters.StatsOnly) return;

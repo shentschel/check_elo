@@ -12,8 +12,8 @@ namespace check_elo.Commands.impl
 {
     public class TomcatCommand : BaseCommand<TomcatParameters>
     {
-        public TomcatCommand(IXClient client, Settings settings, TomcatParameters parameters) : base(client, settings,
-            parameters)
+        public TomcatCommand(IXClient client, Settings settings, TomcatParameters parameters, CheckResult checkResult) : base(client, settings,
+            parameters, checkResult)
         {
         }
 
@@ -99,8 +99,8 @@ namespace check_elo.Commands.impl
                     ? ExitCode.Warning
                     : ExitCode.Critical;
 
-            CheckResult.Message += $"| Tomcat heap usage: {heapInPercent:0.##}%";
-            CheckResult.PerformanceData += $" heap usage={heapInPercent:0.##}";
+            CheckResult.Message += $"; Tomcat heap usage: {heapInPercent:0.##}%";
+            CheckResult.PerformanceData += $"; heap usage={heapInPercent:0.##}";
 
             return true;
         }

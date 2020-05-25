@@ -2,9 +2,9 @@
 {
     public enum ExitCode
     {
-        Ok,
-        Warning,
-        Critical,
-        Unknown
+        Ok = 0,
+        Warning = 1,
+        Critical = 2,
+        Unknown = 3
     }
 }

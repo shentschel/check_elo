@@ -8,8 +8,8 @@ namespace check_elo.Commands.impl
 {
     public class IxSessionCommand : EloCommand<IxSessionParameters>
     {
-        public IxSessionCommand(IXClient client, Settings settings, IxSessionParameters parameters) : base(client,
-            settings, parameters)
+        public IxSessionCommand(IXClient client, Settings settings, IxSessionParameters parameters, CheckResult checkResult) : base(client,
+            settings, parameters, checkResult)
         {
         }
 
@@ -22,7 +22,8 @@ namespace check_elo.Commands.impl
         {
             var sessionCount = Client.IX.getSessionInfos(new SessionInfoParams()).Length;
 
-            CheckResult.Message = string.Format("Active IX sessions: {0} | ixsessions={0}", sessionCount);
+            CheckResult.Message = $"Active IX sessions: {sessionCount}";
+            CheckResult.PerformanceData = $"ixsessions={sessionCount}";
             CheckResult.ExitCode = ExitCode.Ok;
 
             if (Parameters.StatsOnly) return;

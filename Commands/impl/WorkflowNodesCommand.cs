@@ -14,8 +14,8 @@ namespace check_elo.Commands.impl
     {
         private readonly List<WorkflowErrorNode> _errorNodes = new List<WorkflowErrorNode>();
 
-        public WorkflowNodesCommand(IXClient client, Settings settings, WorkflowNodesParameters parameters) : base(
-            client, settings, parameters)
+        public WorkflowNodesCommand(IXClient client, Settings settings, WorkflowNodesParameters parameters, CheckResult checkResult) : base(
+            client, settings, parameters, checkResult)
         {
         }
 

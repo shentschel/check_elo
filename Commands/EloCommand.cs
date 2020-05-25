@@ -9,7 +9,7 @@ namespace check_elo.Commands
 {
     public abstract class EloCommand<T> : BaseCommand<T> where T : LoginParameters
     {
-        protected EloCommand(IXClient client, Settings settings, T parameters) : base(client, settings, parameters)
+        protected EloCommand(IXClient client, Settings settings, T parameters, CheckResult checkResult) : base(client, settings, parameters, checkResult)
         {
         }
 

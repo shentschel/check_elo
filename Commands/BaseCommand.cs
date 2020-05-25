@@ -8,16 +8,17 @@ using pcm.IXClient7;
 namespace check_elo.Commands
 {
     public abstract class BaseCommand<T> : ICommand {
-        protected readonly CheckResult CheckResult = new CheckResult();
         protected readonly IXClient Client;
         protected readonly T Parameters;
         protected readonly Settings Settings;
+        protected readonly CheckResult CheckResult;
 
-        protected BaseCommand(IXClient client, Settings settings, T parameters)
+        protected BaseCommand(IXClient client, Settings settings, T parameters, CheckResult checkResult)
         {
             Settings = settings;
             Parameters = parameters;
             Client = client;
+            CheckResult = checkResult;
             
             Log.Debug("Created BaseCommand");
         }

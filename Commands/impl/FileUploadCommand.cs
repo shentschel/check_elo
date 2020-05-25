@@ -10,8 +10,8 @@ namespace check_elo.Commands.impl
 {
     public class FileUploadCommand : EloCommand<FileUploadParameters>
     {
-        public FileUploadCommand(IXClient client, Settings settings, FileUploadParameters parameters) : base(client,
-            settings, parameters)
+        public FileUploadCommand(IXClient client, Settings settings, FileUploadParameters parameters, CheckResult checkResult) : base(client,
+            settings, parameters, checkResult)
         {
         }
 

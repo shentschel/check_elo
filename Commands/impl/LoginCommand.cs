@@ -9,8 +9,8 @@ namespace check_elo.Commands.impl
 {
     public class LoginCommand : BaseCommand<EloLoginParameters>
     {
-        public LoginCommand(IXClient client, Settings settings, EloLoginParameters parameters) : base(client, settings,
-            parameters)
+        public LoginCommand(IXClient client, Settings settings, EloLoginParameters parameters, CheckResult checkResult) : base(client, settings,
+            parameters, checkResult)
         {
         }
 

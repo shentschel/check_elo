@@ -10,8 +10,8 @@ namespace check_elo.Commands.impl
 {
     public class SqlConnectionCommand : BaseCommand<SqlConnectionParameters>
     {
-        public SqlConnectionCommand(IXClient client, Settings settings, SqlConnectionParameters parameters) : base(
-            client, settings, parameters)
+        public SqlConnectionCommand(IXClient client, Settings settings, SqlConnectionParameters parameters, CheckResult checkResult) : base(
+            client, settings, parameters, checkResult)
         {
         }
 
