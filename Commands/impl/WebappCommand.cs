@@ -75,6 +75,10 @@ namespace check_elo.Commands.impl
 
             switch (Parameters.Name)
             {
+                case "al":
+                case "cs":
+                    commandPart = "?serverInfo&resultAs=html"
+                    url = $"{hostPart}/eloarchivelink/ContentServer{commandPart}"
                 case "ix":
                     commandPart = "?cmd=status";
                     url = $"{hostPart}/{urlPart}/{Parameters.Name}{commandPart}";
